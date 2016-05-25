@@ -3,7 +3,7 @@
 # https://www.chriscowley.me.uk/blog/2014/06/25/super-slick-agile-puppet-for-devops/
 # pre-commit git hook to check the validity of  modules manifest/yaml
 
-PUPPETLINT_OPTS=" --no-80chars-check "
+PUPPETLINT_OPTS=" --no-80chars-check -no-class_inherits_from_params_class-check "
 
 echo "******************************************************"
 echo "*** INFO Running pre-commit script..."
