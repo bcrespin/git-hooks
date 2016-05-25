@@ -3,6 +3,10 @@
 # https://www.chriscowley.me.uk/blog/2014/06/25/super-slick-agile-puppet-for-devops/
 # pre-commit git hook to check the validity of  modules manifest/yaml
 
+
+echo "******************************************************"
+echo "*** INFO Running pre-commit script..."
+
 for file in `git diff --name-only --cached | grep -E '\.(pp)'`; do
 
   echo "*** INFO Checking style on $file : "
@@ -18,7 +22,7 @@ for file in `git diff --name-only --cached | grep -E '\.(pp)'`; do
   echo "*** INFO Checking syntax of module file : $file"
   puppet parser validate $file
   ret=$?
-  if [ ret -ne 0 ]; then
+  if [ $ret -ne 0 ]; then
      echo "**** ERROR aborting the commit";
      exit $ret
   else

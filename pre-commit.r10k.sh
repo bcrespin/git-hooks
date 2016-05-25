@@ -19,6 +19,10 @@
 R10KMISSING_ERROR_MESAGE="*** ERROR : r10k not found, no synthax check done !"
 R10KMISSING_ERROR_EXIT=1
 
+
+echo "******************************************************"
+echo "*** INFO Running pre-commit script..."
+
 ret=`whereis r10k | awk '{print $2}'`
 if [ "$ret" == "" ]; then
 	echo $R10KMISSING_ERROR_MESAGE
