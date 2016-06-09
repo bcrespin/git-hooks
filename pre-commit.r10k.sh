@@ -12,7 +12,7 @@
 #
 # based on script seens there : N/A
 #
-# tested on linux Centos 7, should work on FreeBSD also
+# tested on linux Centos 7, FreeBSD  10.2
 
 #ensure r10k there
 #if not , display message and exit depending of want you want 
@@ -47,15 +47,16 @@ done
 #add other possible check there
 # as I put hiera data  with r10k
 for file in `git diff --name-only --cached | grep -E '\.(yaml)'`; do
-  echo "*** INFO Checking YAML is valid : $file"
-  ruby -e "require 'yaml'; YAML.parse(File.open('$file'))"
-  ret=$?
-  if [ "$ret" == "1" ]; then
+  if [ -f ./$file ]; then
+    echo "*** INFO Checking YAML is valid : $file"
+    ruby -e "require 'yaml'; YAML.parse(File.open('$file'))"
+    ret=$?
+    if [ "$ret" == "1" ]; then
   	echo "**** ERROR aborting the commit";
         exit $ret
-
-  else
-    echo "YAML looks good"
+    else
+      echo "YAML looks good"
+    fi
   fi
 done
 exit 0
